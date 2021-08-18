@@ -13,7 +13,7 @@ func worker(id int, jobs <-chan job, wg *sync.WaitGroup, cPS *uint64, rPS uint64
 	defer wg.Done()
 	for fn := range jobs {
 		for atomic.LoadUint64(cPS) > rPS {
-			fmt.Println("Sleeping")
+// 			fmt.Println("Sleeping")
 			time.Sleep(time.Millisecond * 20)
 		}
 		atomic.AddUint64(cPS, 1)
